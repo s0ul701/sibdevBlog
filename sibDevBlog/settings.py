@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'captcha',
     'bootstrap3',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,8 @@ settings.CAPTCHA_FONT_SIZE = 30
 settings.CAPTCHA_LENGTH = 6
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+

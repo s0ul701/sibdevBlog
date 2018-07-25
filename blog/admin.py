@@ -1,20 +1,20 @@
 from django.contrib import admin
 from blog.models import Users, Posts
+from django_summernote.admin import SummernoteModelAdmin    # пакет модели текстового редактора
 
-# Register your models here.
 
-
-class UserAdmin(admin.ModelAdmin):      # TODO: настроить поля редактирования модели
-    # fields = ("login", "password")      # отображение полей на странице редактирования
-    list_display = ("username", "password", "email", "first_name", "last_name", "is_active", )     # отображение полей в таблице модели
+class UserAdmin(admin.ModelAdmin):      # TODO: настроить поля редактирования модели (какие нужны, какние - нет)
+    # fields = ("login", "password")      # отображение полей на странице редактирования (+ их порядок)
+    list_display = ("username", "password", "email", "first_name", "last_name", "is_active", )     # отображение полей в таблице модели (+ их порядок)
 
 
 admin.site.register(Users, UserAdmin)
 
 
-class PostAdmin(admin.ModelAdmin):
-    fields = ("title", "author", "text")
-    list_display = ("title", "author", "text", "published_date")
+class PostAdmin(SummernoteModelAdmin):
+    fields = ("author", "title", "text")
+    list_display = ("author", "title", "text", "published_date")
+    summernote_fields = ('title', 'text')       # поля, отображающиеся с помощью текстового редактора
 
 
 admin.site.register(Posts, PostAdmin)

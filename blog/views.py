@@ -4,8 +4,6 @@ from django.contrib.auth import login, logout
 from blog.models import Users, Posts
 from django.shortcuts import redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.forms.utils import ErrorDict, ErrorList
-from django.forms import BaseForm
 
 
 def register(request):
@@ -13,7 +11,7 @@ def register(request):
         return redirect('profile', username=request.user.username)
 
     context = {"form": RegisterForm()}
-    if request.POST:        # TODO: обработки ошибок!!!
+    if request.POST:
         registration_form = RegisterForm(request.POST)
         if registration_form.is_valid() and request.POST['password'] == request.POST['password_repeat']:
             new_user = registration_form.save(commit=False)
@@ -42,7 +40,6 @@ def auth(request):
 
     context = {"form": AuthForm()}
     if request.POST:
-        auth_form = AuthForm(request.POST)
         user = Users.objects.filter(username=request.POST['username'], password=request.POST['password'])
         if user:
             user = user.get()
@@ -55,7 +52,7 @@ def auth(request):
     return render(request, "auth.html", context=context)
 
 
-def profile(request, username):
+def profile(request, username):     # TODO: настроить страницу профиля
     context = {}
     context['user'] = request.user
 
@@ -68,11 +65,9 @@ def deauth(request):
 
 
 def index(request):
-    context = {'user': request.user,
-               # 'posts': Posts.objects.all().order_by('-published_date'),
-               }
+    context = {'user': request.user}
     paginator = Paginator(Posts.objects.all().order_by('-published_date'), 10)
-    page = request.GET.get('page')
+    page = request.GET.get('page')      # TODO: что тут происходит???
     try:
         context['posts'] = paginator.page(page)
     except PageNotAnInteger:
@@ -86,5 +81,4 @@ def index(request):
 def post(request, post_id):
     post = Posts.objects.get(pk=post_id)
     context = {'post': post}
-    a = 0
     return render(request, 'post.html', context=context)

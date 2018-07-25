@@ -1,36 +1,33 @@
 from django import forms
-from captcha.fields import CaptchaField
+from captcha.fields import CaptchaField, CaptchaTextInput  # пакетаформы капчи (и ее текстового поля)
 from blog.models import Users
-import captcha
+
+# TODO: убрать лишнее
 
 
-class RegisterForm(forms.ModelForm):  # TODO: переопределить поле "username"
-    # field_order = ['email', 'username', 'password', 'password_repeat', 'captcha']
-
+class RegisterForm(forms.ModelForm):
     password_repeat = forms.CharField(min_length=6,
                                       label="",
                                       widget=forms.PasswordInput(attrs={
                                           'placeholder': 'Repeat password',
                                           'class': 'form-control',
-
                                       }),
 
                                       )
-    captcha = CaptchaField(label="", widget=captcha.fields.CaptchaTextInput(attrs={
-        'placeholder': 'Enter captcha',
-        'class': 'form-control',
-
-    }),
+    captcha = CaptchaField(label="",
+                           widget=CaptchaTextInput(attrs={
+                               'placeholder': 'Enter captcha',
+                               'class': 'form-control',
+                           }),
                            )
 
     class Meta:
         model = Users
-        fields = ['email', 'username', 'password', 'captcha']
+        fields = ['email', 'username', 'password']
         widgets = {
             'email': forms.EmailInput(attrs={
                 'placeholder': 'E-mail',
                 'class': 'form-control',
-
             }),
             'password': forms.PasswordInput(attrs={
                 'placeholder': 'Password',
@@ -38,11 +35,10 @@ class RegisterForm(forms.ModelForm):  # TODO: переопределить по�
                 'pattern': '[^А-Яа-яЁё]{6,}',
             }),
             'username': forms.TextInput(attrs={
-                                   'placeholder': 'Login',
-                                   'class': 'form-control',
-                                   'pattern': '[a-zA-Z0-9_]{4,}'
-                               }),
-
+                'placeholder': 'Login',
+                'class': 'form-control',
+                'pattern': '[a-zA-Z0-9_]{4,}'
+            }),
         }
         help_texts = {
             'email': '',
