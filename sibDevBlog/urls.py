@@ -22,5 +22,8 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path(r'captcha/', include('captcha.urls')),
     path('auth/', views.auth, name='auth'),
-    path('profile/<slug:username>/', views.profile, name='profile')
+    path('profile/<slug:username>/', views.profile, name='profile'),
+    path('logout', views.deauth, name='deauth'),
+    path('index/', views.index, name='index'),
+    path('post/<int:post_id>/', views.post, name='post'),
 ]

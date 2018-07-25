@@ -7,6 +7,7 @@ from django.contrib.auth.models import AbstractUser
 class Users(AbstractUser):
     username = models.CharField(null=False, blank=False, help_text="Enter login", max_length=100, verbose_name="Login", unique=True)
     password = models.CharField(null=False, blank=False, help_text="Enter password", max_length=100, verbose_name="Password")
+    email = models.EmailField(blank=False, null=False, help_text="Enter e-mail", max_length=100, verbose_name='E-mail', unique=True)
 
     class Meta:
         verbose_name = "User"
@@ -17,7 +18,7 @@ class Users(AbstractUser):
 
 
 class Posts(models.Model):
-    title = models.CharField(null=False, blank=False, help_text="Enter title of post", max_length=100, verbose_name="Title")
+    title = models.CharField(null=False, blank=False, help_text="Enter title of post", max_length=200, verbose_name="Title")
     text = models.TextField(null=False, blank=False, help_text="Enter text of post", verbose_name="Text")
     author = models.ForeignKey(to=Users, on_delete=models.SET_NULL, null=True, blank=False, help_text="Enter author of post", verbose_name="Author of post")
     published_date = models.DateTimeField(auto_now_add=True, verbose_name="Published date")

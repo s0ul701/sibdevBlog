@@ -2,11 +2,37 @@
 
 {% block title %} Registration {% endblock %}
 
+{% block login_logout_register_block %}
+    <a class="btn btn-md btn-outline-light mx-3" href={% url "auth" %}>Log In</a>
+{% endblock %}
+
 {% block content %}
-    <div class="text-center container" style="width: 250px">
-        <form action="/register/" method="post"> {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Sign Up"/>
+    <div class="text-center container col-6" style="width: 250px; margin-top: 200px">
+        <form action="/register/" method="post">
+            {% csrf_token %}
+            <div class="my-2">
+                {{ form.email }}
+            </div >
+            <div class="my-2">
+                {{ form.username }}
+            </div>
+            <div class="my-2">
+                {{ form.password }}
+            </div>
+            <div class="my-2">
+                {{ form.password_repeat }}
+            </div>
+            <div class="mt-4 mb-2">
+                {{ form.captcha }}
+            </div>
+            <input type="submit" class="btn btn-outline-secondary btn-block" value="Sign Up"/>
+            <ul class="list-group m-2" role="alert">
+                {% for error in form.set_errors %}
+                    <li class="list-group-item list-group-item-danger">
+                        <strong>{{ error }}</strong>
+                    </li>
+                {% endfor %}
+            </ul>
         </form>
     </div>
 
