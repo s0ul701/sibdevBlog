@@ -1,0 +1,1 @@
+web: gunicorn sibDevBlog.wsgi --log-file -

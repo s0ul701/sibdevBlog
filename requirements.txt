@@ -1,0 +1,14 @@
+dj-config-url
+Django==2.0.7
+django-bootstrap==0.2.4
+django-bootstrap3==10.0.1
+django-ranged-response==0.2.0
+django-simple-captcha==0.5.9
+django-summernote==0.8.8.7
+gunicorn==19.9.0
+Pillow==5.2.0
+psycopg2==2.7.5
+psycopg2-binary==2.7.5
+pytz==2018.5
+six==1.11.0
+whitenoise==3.3.1
