@@ -25,7 +25,7 @@ SECRET_KEY = 'jv)#+bh=^=@i1aqojv&^163@vgu#(46tpcv3&(g87jir9fa_9g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['enigmatic-woodland-24241.herokuapp.com']
+ALLOWED_HOSTS = ['sibdevblog.herokuapp.com']
 
 # Application definition
 
