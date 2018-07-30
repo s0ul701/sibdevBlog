@@ -29,5 +29,8 @@ urlpatterns = [
     path('index/', views.index, name='index'),
     path('post/<int:post_id>/', views.post, name='post'),
     path('summernote/', include('django_summernote.urls')),
+    path('edit/<int:post_id>/', views.edit, name='edit'),
+    path('create', views.create, name='create'),
+    path('edit_profile/', views.edit_profile, name='edit_profile'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

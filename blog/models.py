@@ -19,6 +19,7 @@ class Users(AbstractUser):
 
 class Posts(models.Model):
     title = models.CharField(null=False, blank=False, max_length=200, verbose_name="Title")
+    pretext = models.TextField(null=False, blank=False, max_length=500, verbose_name="Pre-text")
     text = models.TextField(null=False, blank=False, verbose_name="Text")
     author = models.ForeignKey(to=Users, on_delete=models.SET_NULL, null=True, blank=False, verbose_name="Author of post")
     published_date = models.DateTimeField(auto_now_add=True, verbose_name="Published date")

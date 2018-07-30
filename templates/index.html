@@ -6,31 +6,33 @@
 
 {% block login_logout_register_block %}
     {% if user.is_authenticated %}
-        <a class="btn btn-md btn-outline-light mx-3" href={% url "deauth" %}>Log Out</a>
+        <a class="btn btn-outline-light mx-3" href="{% url "profile" user.username %}">Profile</a>
+        <a class="btn btn-outline-light mx-3" href={% url "deauth" %}>Log Out</a>
     {% else %}
-        <a class="btn btn-md btn-outline-light mx-3" href={% url "register" %}>Sign Up</a>
-        <a class="btn btn-md btn-outline-light mx-3" href={% url "auth" %}>Log In</a>
+        <a class="btn btn-outline-light mx-3" href={% url "register" %}>Sign Up</a>
+        <a class="btn btn-outline-light mx-3" href={% url "auth" %}>Log In</a>
     {% endif %}
 {% endblock %}
 
 {% block content %}
-
-
     <div class="container">
         {% if posts %}
             {% for post in posts %}
                 <article>
-                    <a class="text-secondary" style="text-decoration: none;" href={% url 'post' post.pk %}>
+                    <a class="text-secondary" style="text-decoration: none" href={% url 'post' post.pk %}>
                         <h3 class="card-title"> {{ post.title }} </h3>
                     </a>
                     <p>
                         {{ post.published_date|date:"M d, Y H:m" }} by
-                        <a class="" style="text-decoration: none;" href="{% url 'profile' post.author %}">{{ post.author }}</a>
+                        <a class="font-italic alert-link" style="text-decoration: none" href="{% url 'profile' post.author %}">{{ post.author }}</a>
                     </p>
-                    <div style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical" class="container">
-                        {{ post.text|linebreaksbr }}
+                    <div class="container">
+{#                    <div id="no-back" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 10; -webkit-box-orient: vertical; line-height: 24px; height: 240px" class="container">#}
+                        {{ post.pretext|safe }}
                     </div>
-                    <a class="btn btn-outline-secondary mt-3" href="{% url 'post' post.pk %}">Read...</a>
+                    <div class="d-flex justify-content-end">
+                        <a class="btn btn-outline-secondary mt-3" href="{% url 'post' post.pk %}">Read...</a>
+                    </div>
                 </article>
                 <hr>
             {% endfor %}

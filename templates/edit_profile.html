@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Edit profile
+{% endblock %}
+
+{% block login_logout_register_block %}
+    <a class="btn btn-outline-light mx-3" href="{% url 'profile' user.username %}">Profile</a>
+    <a class="btn btn-outline-light mx-3" href={% url "deauth" %}>Log Out</a>
+{% endblock %}
+
+{% block content %}
+    <h1>
+        {{ user.username }}
+    </h1>
+    <div class="d-flex justify-content-end">
+        <form action="{% url 'edit_profile' %}" method="post">
+            {% csrf_token %}
+            <div class="">
+                <div class="mb-2">
+                    {{ form.email }}
+                </div>
+                <div class="mb-2">
+                    {{ form.first_name }}
+                </div>
+                <div class="mb-2">
+                    {{ form.last_name }}
+                </div>
+                <div class="mb-2">
+                    {{ form.current_password }}
+                </div>
+                <div class="mb-2">
+                    {{ form.new_password }}
+                </div>
+                <div class="mb-2">
+                    {{ form.new_password_repeat }}
+                </div>
+                <input type="submit" class="btn btn-outline-secondary btn-block" value="Save changes"/>
+
+                <ul class="list-group m-2">
+                    {% for successes in form.set_successes %}
+                        <li class="list-group-item list-group-item-success">
+                            <strong>{{ successes }}</strong>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <ul class="list-group m-2">
+                    {% for error in form.set_errors %}
+                        <li class="list-group-item list-group-item-danger">
+                            <strong>{{ error }}</strong>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </form>
+
+    </div>
+{% endblock %}

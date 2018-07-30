@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Edit
+{% endblock %}
+
+{% block login_logout_register_block %}
+    <a class="btn btn-outline-light mx-3" href="{% url "profile" user.username %}">Profile</a>
+    <a class="btn btn-outline-light mx-3" href={% url "deauth" %}>Log Out</a>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form action="{% url 'edit' post_id %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.title }}
+            </div>
+            <div class="mb-3">
+                {{ form.pretext }}
+            </div>
+            <div class="">
+                {{ form.text }}
+            </div>
+            <input type="submit" class="btn btn-outline-secondary my-3" value="Save changes"/>
+        </form>
+    </div>
+
+{% endblock %}
