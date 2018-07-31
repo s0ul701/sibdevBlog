@@ -26,7 +26,7 @@ SECRET_KEY = 'jv)#+bh=^=@i1aqojv&^163@vgu#(46tpcv3&(g87jir9fa_9g'
 # DEBUG = True  # debug config
 
 ALLOWED_HOSTS = ['sibdevblog.herokuapp.com']      # deploy config
-DEBUG = False
+DEBUG = True
 
 # Application definition
 
