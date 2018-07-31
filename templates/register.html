@@ -3,12 +3,12 @@
 {% block title %} Registration {% endblock %}
 
 {% block login_logout_register_block %}
-    <a class="btn btn-md btn-outline-light mx-3" href={% url "auth" %}>Log In</a>
+    <a class="btn btn-md btn-outline-light mx-3" href="{% url "auth" %}">Log In</a>
 {% endblock %}
 
 {% block content %}
     <div class="text-center container col-6" style="width: 250px; margin-top: 200px">
-        <form action="/register/" method="post">
+        <form action="{% url 'register' %}" method="post">
             {% csrf_token %}
             <div class="my-2">
                 {{ form.email }}
@@ -29,7 +29,7 @@
                 {{ form.captcha }}
             </div>
             <input type="submit" class="btn btn-outline-secondary btn-block" value="Sign Up"/>
-            <ul class="list-group m-2" role="alert">
+            <ul class="list-group m-2">
                 {% for error in form.set_errors %}
                     <li class="list-group-item list-group-item-danger">
                         <strong>{{ error }}</strong>

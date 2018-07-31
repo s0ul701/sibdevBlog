@@ -14,7 +14,7 @@ admin.site.register(Users, UserAdmin)
 class PostAdmin(SummernoteModelAdmin):
     fields = ('author', 'title', 'pretext', 'text')
     list_display = ('title', 'author', 'published_date')
-    summernote_fields = ('pretext', 'text')       # поля, отображающиеся с помощью текстового редактора
+    # summernote_fields = ('pretext', 'text')       # поля, отображающиеся с помощью текстового редактора
 
 
 admin.site.register(Posts, PostAdmin)

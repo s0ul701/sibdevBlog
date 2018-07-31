@@ -12,10 +12,10 @@
             <a class="btn btn-outline-light mx-3" href="{% url 'profile' user.username %}">Profile</a>
         {% endif %}
 
-        <a class="btn btn-outline-light mx-3" href={% url "deauth" %}>Log Out</a>
+        <a class="btn btn-outline-light mx-3" href="{% url "deauth" %}">Log Out</a>
     {% else %}
-        <a class="btn btn-md btn-outline-light mx-3" href={% url "register" %}>Sign Up</a>
-        <a class="btn btn-md btn-outline-light mx-3" href={% url "auth" %}>Log In</a>
+        <a class="btn btn-md btn-outline-light mx-3" href="{% url "register" %}">Sign Up</a>
+        <a class="btn btn-md btn-outline-light mx-3" href="{% url "auth" %}">Log In</a>
     {% endif %}
 {% endblock %}
 
@@ -23,31 +23,25 @@
     <h1 class="">{{ username }}</h1>
     {% if user.username == username %}
         <div class="d-flex justify-content-end mb-5 container">
-            <a class="btn btn-outline-primary" href={% url 'create' %}><h3>+ Add new post</h3></a>
-
-{#            <a class="btn btn-outline-secondary-secondary" style="color:#e6e6e6; background: rgba(6, 31, 71, 0.8);" href="#">+ Add new post</a>#}
+            <a class="btn btn-outline-primary" href="{% url 'create' %}"><h3>+ Add new post</h3></a>
         </div>
     {% endif %}
     <div class="container">
         {% if posts %}
             {% for post in posts %}
                 <article>
-                    <a class="text-secondary" style="text-decoration: none;" href={% url 'post' post.pk %}>
+                    <a class="text-secondary" style="text-decoration: none;" href="{% url 'post' post.pk %}">
                         <h5 class="card-title"> {{ post.title }} </h5>
                     </a>
                     <p class="mb-0">
                         {{ post.published_date|date:"M d, Y H:m" }}
                     </p>
-{#                    <div style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 10; -webkit-box-orient: vertical; line-height: 24px; height: 240px" class="container">#}
-{#                        {{ post.text|safe }}#}
-{#                    </div>#}
                     <div class="d-flex justify-content-end">
-                        <a class="btn btn-outline-secondary" href={% url 'post' post.pk %}>Read...</a>
+                        <a class="btn btn-outline-secondary" href="{% url 'post' post.pk %}">Read...</a>
                         {% if user.username == username %}
-                            <a class="btn btn-outline-secondary ml-3" href={% url 'edit' post.pk %}>Edit...</a>
+                            <a class="btn btn-outline-secondary ml-3" href="{% url 'edit' post.pk %}">Edit...</a>
                         {% endif %}
                     </div>
-
                 </article>
                 <hr>
             {% endfor %}

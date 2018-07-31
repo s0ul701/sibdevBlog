@@ -25,7 +25,7 @@ SECRET_KEY = 'jv)#+bh=^=@i1aqojv&^163@vgu#(46tpcv3&(g87jir9fa_9g'
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True  # debug config
 
-ALLOWED_HOSTS = ['sibdevblog.herokuapp.com']      # deploy config
+ALLOWED_HOSTS = ['localhost']      # deploy config
 DEBUG = False
 
 # Application definition
@@ -138,7 +138,7 @@ settings.CAPTCHA_IMAGE_SIZE = (220, 50)  # captcha config
 settings.CAPTCHA_FONT_SIZE = 30
 settings.CAPTCHA_LENGTH = 6
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

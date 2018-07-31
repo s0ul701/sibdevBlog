@@ -3,12 +3,12 @@
 {% block title %} Authentication {% endblock %}
 
 {% block login_logout_register_block %}
-    <a class="btn btn-md btn-outline-light mx-3" href={% url "register" %}>Sign Up</a>
+    <a class="btn btn-md btn-outline-light mx-3" href="{% url "register" %}">Sign Up</a>
 {% endblock %}
 
 {% block content %}
     <div id="register_form" class="text-center container col-6" style="width: 250px; margin-top: 200px">
-        <form action="/auth/" method="post">
+        <form action="{% url 'auth' %}" method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" class="btn btn-outline-secondary btn-block" value="Log In"/>
