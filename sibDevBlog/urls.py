@@ -27,6 +27,7 @@ urlpatterns = [
     path('profile/<slug:username>/', views.profile, name='profile'),
     path('logout', views.deauth, name='deauth'),
     path('index/', views.index, name='index'),
+    path('', views.index, name='index'),
     path('post/<int:post_id>/', views.post, name='post'),
     path('summernote/', include('django_summernote.urls')),
     path('edit/<int:post_id>/', views.edit, name='edit'),
