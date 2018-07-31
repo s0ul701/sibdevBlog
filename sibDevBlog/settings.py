@@ -23,10 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'jv)#+bh=^=@i1aqojv&^163@vgu#(46tpcv3&(g87jir9fa_9g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  # debug config
+# DEBUG = True  # debug config
 
-# ALLOWED_HOSTS = ['sibdevblog.herokuapp.com']      # deploy config
-# DEBUG = False
+ALLOWED_HOSTS = ['sibdevblog.herokuapp.com']      # deploy config
+DEBUG = False
 
 # Application definition
 
