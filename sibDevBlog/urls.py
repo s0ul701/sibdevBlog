@@ -33,5 +33,5 @@ urlpatterns = [
     path('edit/<int:post_id>/', views.edit, name='edit'),
     path('create', views.create, name='create'),
     path('edit_profile/', views.edit_profile, name='edit_profile'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
