@@ -81,10 +81,10 @@ class PostForm(forms.ModelForm):
                 'style': 'max-width: 100%;',
             }),
             'text': SummernoteWidget(attrs={
-
+                'style': 'background: none !important',
             }),
             'pretext': SummernoteWidget(attrs={
-
+                'style': 'background: none !important',
             }),
         }
 
