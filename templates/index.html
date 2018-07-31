@@ -26,7 +26,7 @@
                         {{ post.published_date|date:"M d, Y H:m" }} by
                         <a class="font-italic alert-link" style="text-decoration: none" href="{% url 'profile' post.author %}">{{ post.author }}</a>
                     </p>
-                    <div class="container">
+                    <div class="container pl-5">
 {#                    <div id="no-back" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 10; -webkit-box-orient: vertical; line-height: 24px; height: 240px" class="container">#}
                         {{ post.pretext|safe }}
                     </div>

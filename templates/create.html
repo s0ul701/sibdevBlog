@@ -10,12 +10,15 @@
         <form action="{% url 'create' %}" method="post">
             {% csrf_token %}
             <div class="mb-3">
+                <h4>Title</h4>
                 {{ form.title }}
             </div>
             <div class="mb-3">
+                <h4>Pre-text</h4>
                 {{ form.pretext }}
             </div>
             <div>
+                <h4>Text</h4>
                 {{ form.text }}
             </div>
             <input type="submit" class="btn btn-outline-secondary my-3" value="Create"/>
