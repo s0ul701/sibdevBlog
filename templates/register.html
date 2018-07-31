@@ -15,12 +15,15 @@
             </div >
             <div class="my-2">
                 {{ form.username }}
+                {{ form.username.help_text }}
             </div>
             <div class="my-2">
                 {{ form.password }}
             </div>
             <div class="my-2">
                 {{ form.password_repeat }}
+                {{ form.password_repeat.help_text }}
+
             </div>
             <div class="mt-4 mb-2">
                 {{ form.captcha }}

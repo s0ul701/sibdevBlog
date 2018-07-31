@@ -1,24 +1,21 @@
 from django import forms
-from captcha.fields import CaptchaField, CaptchaTextInput  # пакет формы капчи (и ее текстового поля)
+from captcha.fields import CaptchaField, CaptchaTextInput       # пакет формы капчи (и ее текстового поля)
 from blog.models import Users, Posts
-from django_summernote.widgets import SummernoteWidget
+from django_summernote.widgets import SummernoteWidget      # пакет виджета текстового редактора
 
 
-# TODO: убрать лишнее
+# TODO: убрать лишнее; возможно надо что-то изменить после тестирования; лэйблы для создания поста
 
 
 class RegisterForm(forms.ModelForm):
     password_repeat = forms.CharField(min_length=6,
-                                      label="",
                                       widget=forms.PasswordInput(attrs={
                                           'placeholder': 'Repeat password',
                                           'class': 'form-control',
                                           'pattern': '[^А-Яа-яЁё]{6,}',
                                       }),
-
                                       )
-    captcha = CaptchaField(label="",
-                           widget=CaptchaTextInput(attrs={
+    captcha = CaptchaField(widget=CaptchaTextInput(attrs={
                                'placeholder': 'Enter captcha',
                                'class': 'form-control',
                            }),
@@ -42,20 +39,6 @@ class RegisterForm(forms.ModelForm):
                 'class': 'form-control',
                 'pattern': '[a-zA-Z0-9_]{4,}'
             }),
-        }
-        help_texts = {
-            'email': '',
-            'password': '',
-            'password_repeat': '',
-            'captcha': '',
-            'username': 'Allowed symbol: A-Z, a-z, 0-9, _',
-        }
-        labels = {
-            'email': '',
-            'password': '',
-            'password_repeat': '',
-            'captcha': '',
-            'username': '',
         }
 
 
@@ -103,10 +86,6 @@ class PostForm(forms.ModelForm):
             'pretext': SummernoteWidget(attrs={
 
             }),
-        }
-        labels = {
-            'title': '',
-            'text': '',
         }
 
 

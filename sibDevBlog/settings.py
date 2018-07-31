@@ -23,9 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'jv)#+bh=^=@i1aqojv&^163@vgu#(46tpcv3&(g87jir9fa_9g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True  # debug config
 
-ALLOWED_HOSTS = ['sibdevblog.herokuapp.com']
+# ALLOWED_HOSTS = ['sibdevblog.herokuapp.com']      # deploy config
+# DEBUG = False
 
 # Application definition
 
@@ -133,7 +134,7 @@ AUTH_USER_MODEL = "blog.Users"  # переопределение стандар�
 
 from captcha.conf import settings
 
-settings.CAPTCHA_IMAGE_SIZE = (220, 50)
+settings.CAPTCHA_IMAGE_SIZE = (220, 50)  # captcha config
 settings.CAPTCHA_FONT_SIZE = 30
 settings.CAPTCHA_LENGTH = 6
 
@@ -147,6 +148,7 @@ SUMMERNOTE_CONFIG = {
 }
 
 import dj_database_url
+
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 

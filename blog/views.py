@@ -5,7 +5,8 @@ from blog.models import Users, Posts
 from django.shortcuts import redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
-salt = '1234567'
+salt = '1234567'    # соль для хэширования паролей
+
 
 def register(request):
     if request.user.is_authenticated:
@@ -125,6 +126,7 @@ def create(request):
             form = PostForm(request.POST)
             post = Posts()
             post.title = request.POST['title']
+            post.pretext = request.POST['pretext']
             post.text = request.POST['text']
             post.author = request.user
             post.save()
@@ -142,6 +144,16 @@ def edit_profile(request):
         errors = []
         successes = []
         if request.POST:
+            if request.POST['first_name'] and request.POST['first_name'] != request.user.first_name:
+                request.user.first_name = request.POST['first_name']
+                successes.append('First name successfully changed.')
+                request.user.save(update_fields=['first_name'])
+
+            if request.POST['last_name'] and request.POST['last_name'] != request.user.last_name:
+                request.user.last_name = request.POST['last_name']
+                successes.append('Last name successfully changed.')
+                request.user.save(update_fields=['last_name'])
+
             if request.POST['email'] != request.user.email:
                 if not Users.objects.filter(email=request.POST['email']):
                     request.user.email = request.POST['email']
@@ -151,7 +163,7 @@ def edit_profile(request):
                     errors.append('User with this e-mail already exists.')
 
             if request.POST['current_password']:
-                if request.POST['current_password'] == request.user.password:
+                if hashers.make_password(request.POST['current_password'], salt=salt) == request.user.password:
                     if request.POST['new_password'] == request.POST['new_password_repeat']:
                         successes.append('Password successfully changed.')
                         request.user.password = request.POST['new_password']
