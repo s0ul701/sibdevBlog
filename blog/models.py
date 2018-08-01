@@ -31,3 +31,16 @@ class Posts(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class BlockedIP(models.Model):
+    ip = models.GenericIPAddressField(verbose_name='IP-adress')
+    attempts = models.IntegerField(verbose_name='Attempts', default=0)
+    is_blocked = models.BooleanField(verbose_name='Is blocked', default=False)
+
+    class Meta:
+        verbose_name = 'Blocked IP'
+        verbose_name_plural = "Blocked IP's"
+
+    def __str__(self):
+        return self.ip

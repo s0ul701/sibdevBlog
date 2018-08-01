@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Users, Posts
+from blog.models import Users, Posts, BlockedIP
 from django_summernote.admin import SummernoteModelAdmin    # пакет модели текстового редактора
 
 
@@ -18,3 +18,11 @@ class PostAdmin(SummernoteModelAdmin):
 
 
 admin.site.register(Posts, PostAdmin)
+
+
+class AdminBlockedIP(admin.ModelAdmin):
+    fields = ('ip', 'is_blocked', 'attempts')
+    list_display = ('ip', 'is_blocked', 'attempts')
+
+
+admin.site.register(BlockedIP, AdminBlockedIP)

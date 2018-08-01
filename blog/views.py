@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from blog.forms import RegisterForm, AuthForm, PostForm, ProfileEditForm
 from django.contrib.auth import login, logout, hashers
-from blog.models import Users, Posts
+from blog.models import Users, Posts, BlockedIP
 from django.shortcuts import redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
@@ -41,18 +41,50 @@ def auth(request):
     if request.user.is_authenticated:
         return redirect('profile', username=request.user.username)
 
-    context = {"form": AuthForm()}
     if request.POST:
+        if BlockedIP.objects.filter(ip=request.META['REMOTE_ADDR']) and BlockedIP.objects.get(ip=request.META['REMOTE_ADDR']).is_blocked:
+            if not AuthForm(request.POST).is_valid():
+                auth_form = AuthForm()
+                auth_form.is_need_captcha = True
+                auth_form.error_captcha = True
+
+                context = {'form': auth_form}
+                return render(request, "auth.html", context=context)
+
         user = Users.objects.filter(username=request.POST['username'], password=hashers.make_password(request.POST['password'], salt=salt))
         if user:
+            if BlockedIP.objects.filter(ip=request.META['REMOTE_ADDR']):
+                BlockedIP.objects.get(ip=request.META['REMOTE_ADDR']).delete()
             user = user.get()
             login(request, user)
             return redirect('profile', username=user.username)
         else:
             auth_form = AuthForm()
             auth_form.errors['auth_error'] = True
-            context['form'] = auth_form
-    return render(request, "auth.html", context=context)
+
+            if BlockedIP.objects.filter(ip=request.META['REMOTE_ADDR']):
+                blocked_ip = BlockedIP.objects.get(ip=request.META['REMOTE_ADDR'])
+                blocked_ip.attempts = blocked_ip.attempts + 1
+                blocked_ip.save(update_fields=['attempts'])
+            else:
+                blocked_ip = BlockedIP(ip=request.META['REMOTE_ADDR'], is_blocked=False, attempts=1)
+                blocked_ip.save()
+
+            if BlockedIP.objects.get(ip=request.META['REMOTE_ADDR']).attempts >= 5:
+                auth_form.is_need_captcha = True
+                blocked_ip.is_blocked = True
+                blocked_ip.save(update_fields=['is_blocked'])
+
+            context = {'form': auth_form}
+            return render(request, "auth.html", context=context)
+    else:
+        auth_form = AuthForm()
+        auth_form.is_need_captcha = False
+        if BlockedIP.objects.filter(ip=request.META['REMOTE_ADDR']):
+            if BlockedIP.objects.get(ip=request.META['REMOTE_ADDR']).is_blocked:
+                auth_form.is_need_captcha = True
+        context = {'form': auth_form}
+        return render(request, "auth.html", context=context)
 
 
 def deauth(request):

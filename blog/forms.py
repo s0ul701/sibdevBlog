@@ -1,7 +1,7 @@
 from django import forms
-from captcha.fields import CaptchaField, CaptchaTextInput       # пакет формы капчи (и ее текстового поля)
+from captcha.fields import CaptchaField, CaptchaTextInput  # пакет формы капчи (и ее текстового поля)
 from blog.models import Users, Posts
-from django_summernote.widgets import SummernoteWidget      # пакет виджета текстового редактора
+from django_summernote.widgets import SummernoteWidget  # пакет виджета текстового редактора
 
 
 # TODO: убрать лишнее; возможно надо что-то изменить после тестирования; лэйблы для создания поста
@@ -16,10 +16,10 @@ class RegisterForm(forms.ModelForm):
                                       }),
                                       )
     captcha = CaptchaField(widget=CaptchaTextInput(attrs={
-                               'placeholder': 'Enter captcha',
-                               'class': 'form-control',
-                           }),
-                           )
+        'placeholder': 'Enter captcha',
+        'class': 'form-control',
+    }),
+    )
 
     class Meta:
         model = Users
@@ -45,30 +45,50 @@ class RegisterForm(forms.ModelForm):
         }
 
 
-class AuthForm(forms.ModelForm):
-    class Meta:
-        model = Users
-        fields = ['username', 'password']
-        widgets = {
-            'username': forms.TextInput(attrs={
-                'placeholder': 'Username',
-                'class': 'form-control',
+class AuthForm(forms.Form):
+    captcha = CaptchaField(required=True,
+                           widget=CaptchaTextInput(attrs={
+                               'placeholder': 'Enter captcha',
+                               'class': 'form-control',
+                           }),
+                           )
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'placeholder': 'Username',
+        'class': 'form-control',
 
-            }),
-            'password': forms.PasswordInput(attrs={
-                'placeholder': 'Password',
-                'class': 'form-control',
+    })
+    )
+    password = forms.CharField(min_length=6,
+                               widget=forms.PasswordInput(attrs={
+                                   'placeholder': 'Password',
+                                   'class': 'form-control',
+                                   'pattern': '[^А-Яа-яЁё]{6,}',
+                               }),
+                               )
 
-            })
-        }
-        help_texts = {
-            'username': '',
-            'password': '',
-        }
-        labels = {
-            'username': '',
-            'password': '',
-        }
+    # class Meta:
+    #     model = Users
+    #     fields = ['username', 'password']
+    #     widgets = {
+    #         'username': forms.TextInput(attrs={
+    #             'placeholder': 'Username',
+    #             'class': 'form-control',
+    #
+    #         }),
+    #         'password': forms.PasswordInput(attrs={
+    #             'placeholder': 'Password',
+    #             'class': 'form-control',
+    #
+    #         })
+    #     }
+    #     help_texts = {
+    #         'username': '',
+    #         'password': '',
+    #     }
+    #     labels = {
+    #         'username': '',
+    #         'password': '',
+    #     }
 
 
 class PostForm(forms.ModelForm):
