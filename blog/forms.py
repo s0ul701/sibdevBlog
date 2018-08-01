@@ -37,7 +37,10 @@ class RegisterForm(forms.ModelForm):
             'username': forms.TextInput(attrs={
                 'placeholder': 'Login',
                 'class': 'form-control',
-                'pattern': '[a-zA-Z0-9_]{4,}'
+                'pattern': '[a-zA-Z0-9_]{4,}',
+                # 'data-toggle': 'tooltip',
+                # 'data-placement': 'right',
+                # 'title': '1234567',
             }),
         }
 
@@ -80,12 +83,12 @@ class PostForm(forms.ModelForm):
                 'class': 'form-control',
                 'style': 'max-width: 100%;',
             }),
-        #     'text': SummernoteWidget(attrs={
-        #         'style': 'background: none !important',
-        #     }),
-        #     'pretext': SummernoteWidget(attrs={
-        #         'style': 'background: none !important',
-        #     }),
+            'text': SummernoteWidget(attrs={
+                'style': 'background: none !important',
+            }),
+            'pretext': SummernoteWidget(attrs={
+                'style': 'background: none !important',
+            }),
         }
 
 

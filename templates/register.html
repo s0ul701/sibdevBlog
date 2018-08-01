@@ -13,17 +13,14 @@
             <div class="my-2">
                 {{ form.email }}
             </div >
-            <div class="my-2">
+            <div class="my-2" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="Allowed symbols: A-Z, a-z, 0-9, _">
                 {{ form.username }}
-                {{ form.username.help_text }}
             </div>
-            <div class="my-2">
+            <div class="my-2" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="Allowed symbols: all excepted russian">
                 {{ form.password }}
             </div>
             <div class="my-2">
                 {{ form.password_repeat }}
-                {{ form.password_repeat.help_text }}
-
             </div>
             <div class="mt-4 mb-2">
                 {{ form.captcha }}
@@ -38,5 +35,4 @@
             </ul>
         </form>
     </div>
-
 {% endblock %}
