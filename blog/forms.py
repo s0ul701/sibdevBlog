@@ -4,7 +4,7 @@ from blog.models import Users, Posts
 from django_summernote.widgets import SummernoteWidget  # пакет виджета текстового редактора
 
 
-# TODO: убрать лишнее; возможно надо что-то изменить после тестирования; лэйблы для создания поста
+# TODO: убрать лишнее; возможно надо что-то изменить после тестирования
 
 
 class RegisterForm(forms.ModelForm):

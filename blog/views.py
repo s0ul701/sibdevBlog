@@ -99,7 +99,7 @@ def profile(request, username):     # TODO: настроить страницу 
     user = Users.objects.get(username=username)
     context['posts'] = Posts.objects.filter(author_id=user.id).order_by('-published_date')
     paginator = Paginator(Posts.objects.filter(author_id=user.id).order_by('-published_date'), 10)
-    page = request.GET.get('page')  # TODO: что тут происходит???
+    page = request.GET.get('page')
     try:
         context['posts'] = paginator.page(page)
     except PageNotAnInteger:
@@ -113,7 +113,7 @@ def profile(request, username):     # TODO: настроить страницу 
 def index(request):
     context = {'user': request.user}
     paginator = Paginator(Posts.objects.all().order_by('-published_date'), 10)
-    page = request.GET.get('page')      # TODO: что тут происходит???
+    page = request.GET.get('page')
     try:
         context['posts'] = paginator.page(page)
     except PageNotAnInteger:

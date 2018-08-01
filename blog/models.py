@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser     # пакет для перегрузки стандартного класса User
 from django_summernote.fields import SummernoteTextField
 
-# TODO: исправить длину пароля
-
 
 class Users(AbstractUser):
     username = models.CharField(null=False, blank=False, max_length=100, verbose_name="Login", unique=True)
