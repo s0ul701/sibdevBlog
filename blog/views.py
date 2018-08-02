@@ -98,7 +98,7 @@ def profile(request, username):     # TODO: настроить страницу 
     context['username'] = username
     user = Users.objects.get(username=username)
     context['posts'] = Posts.objects.filter(author_id=user.id).order_by('-published_date')
-    paginator = Paginator(Posts.objects.filter(author_id=user.id).order_by('-published_date'), 10)
+    paginator = Paginator(Posts.objects.filter(author_id=user.id).order_by('-published_date'), 5)
     page = request.GET.get('page')
     try:
         context['posts'] = paginator.page(page)
