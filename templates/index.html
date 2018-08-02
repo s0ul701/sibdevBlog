@@ -28,7 +28,7 @@
                             <a class="font-italic alert-link" style="text-decoration: none" href="{% url 'profile' post.author %}">{{ post.author }}</a>
                         {% endif %}
                     </p>
-                    <div class="container pl-5" style="word-break: break-all">
+                    <div class="container pl-5" style="word-wrap: break-word; overflow-wrap: break-word">
                         {{ post.pretext|safe }}
                     </div>
                     <div class="d-flex justify-content-end">

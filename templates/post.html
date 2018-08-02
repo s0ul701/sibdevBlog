@@ -23,10 +23,9 @@
             {{ post.published_date|date:"M d, Y H:m" }} by
             <a class="font-italic alert-link" style="text-decoration: none" href="{% url 'profile' post.author %}">{{ post.author }}</a>
         </p>
-        <div class="container link">
+        <div class="container link" style="word-wrap: break-word; overflow-wrap: break-word">
             {{ post.pretext|safe }}
             {{ post.text|safe}}
         </div>
-
     </div>
 {% endblock %}
