@@ -45,6 +45,14 @@
                 </article>
                 <hr>
             {% endfor %}
+
+            {% if posts.has_previous %}
+                <a class="btn btn-outline-secondary m-3" href="?page={{ posts.previous_page_number }}">< Previously</a>
+            {% endif %}
+            {% if posts.has_next %}
+                <a class="btn btn-outline-secondary m-3" href="?page={{ posts.next_page_number }}"> Next ></a>
+            {% endif %}
+
         {% endif %}
     </div>
 {% endblock %}

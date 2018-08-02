@@ -112,7 +112,7 @@ def profile(request, username):     # TODO: настроить страницу 
 
 def index(request):
     context = {'user': request.user}
-    paginator = Paginator(Posts.objects.all().order_by('-published_date'), 10)
+    paginator = Paginator(Posts.objects.all().order_by('-published_date'), 5)
     page = request.GET.get('page')
     try:
         context['posts'] = paginator.page(page)
