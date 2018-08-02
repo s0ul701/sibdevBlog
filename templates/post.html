@@ -20,8 +20,10 @@
             <h3 class="pt-3 pr-3 font-weight-bold font-italic text-secondary"> {{ post.title }} </h3>
         </div>
         <p>
-            {{ post.published_date|date:"M d, Y H:m" }} by
-            <a class="font-italic alert-link" style="text-decoration: none" href="{% url 'profile' post.author %}">{{ post.author }}</a>
+            {{ post.published_date|date:"M d, Y H:m" }}
+            {% if post.author %}
+                by <a class="font-italic alert-link" style="text-decoration: none" href="{% url 'profile' post.author %}">{{ post.author }}</a>
+            {% endif %}
         </p>
         <div class="container link" style="word-wrap: break-word; overflow-wrap: break-word">
             {{ post.pretext|safe }}
